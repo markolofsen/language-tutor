@@ -1,5 +1,6 @@
 import { appPassword, appSecret, origin } from "@/config";
 import { passwordMatches, SESSION_COOKIE, verifySessionToken } from "@/auth/session";
+import { clientKey, passwordThrottle, TOO_MANY } from "@/auth/throttle";
 import { clientRedirects } from "@/oauth/client";
 import { CODE_TTL_S } from "@/oauth/config";
 import { seal } from "@/oauth/seal";
@@ -57,7 +58,15 @@ export async function POST(request: Request) {
   const params = read(field);
   if (!params) return refuse();
   const trusted = await signedIn(request);
-  if (!trusted && !passwordMatches(field("password") ?? "", appPassword())) return form(params, true, "That password is not right.");
+  if (!trusted) {
+    const who = clientKey(request.headers);
+    if (passwordThrottle.blocked(who)) return form(params, true, TOO_MANY);
+    if (!passwordMatches(field("password") ?? "", appPassword())) {
+      passwordThrottle.fail(who);
+      return form(params, true, "That password is not right.");
+    }
+    passwordThrottle.clear(who);
+  }
 
   const code = seal({
     typ: "code",

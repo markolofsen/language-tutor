@@ -2,6 +2,8 @@
 
 A personal language tutor where **your AI assistant is the teacher**. The app stores your words, schedules reviews and shows the exercises that need a screen; Claude, ChatGPT or Codex talks to it over [MCP](https://modelcontextprotocol.io) and does the teaching: it writes stories from your words, judges your translations, names every mistake and remembers your habits.
 
+> **Status: early.** It runs a real learner's daily practice, but it is a single-user app. Today it teaches English to Russian speakers; other languages are planned, not built.
+
 Today it teaches English to Russian speakers. Other languages are planned.
 
 ## How it works
@@ -46,6 +48,14 @@ Open **Profile → Connect an assistant** in the app. It has the steps for Claud
 
 ## Development
 `pnpm check` runs lint, type-check and the tests (a local libSQL file, no server needed). `pnpm db:generate` after changing `src/db/schema.ts`. The code map and invariants are in [`CLAUDE.md`](CLAUDE.md). See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+## Limits and security
+- **One user, one writer.** One password, one SQLite file, one process that writes. Do not scale it horizontally.
+- **Sign-in is rate limited in memory** (5 failed attempts per address and 40 in total per 15 minutes). On a single server that is the limit; on serverless each instance counts alone, so use a long password.
+- **Secrets are yours.** Nothing secret ships in the repository; set `APP_PASSWORD`, `APP_SECRET` and `MCP_TOKEN` as long random values. Changing `APP_SECRET` signs every client out.
+- **No off-site backup yet.** Back up the database file yourself (a Turso database has its own restore options).
+- **English first.** The prompts, word rules and UI copy are English; the learner's language is Russian.
+- Found a vulnerability? Open a private security advisory on GitHub rather than a public issue.
 
 ## License
 [MIT](LICENSE)
