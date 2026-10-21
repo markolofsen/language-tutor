@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1792471803349,
+      "tag": "0000_striped_zuras",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1792491715058,
+      "tag": "0001_mushy_sunfire",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1792575051202,
+      "tag": "0002_dashing_hawkeye",
+      "breakpoints": true
+    }
+  ]
+}
