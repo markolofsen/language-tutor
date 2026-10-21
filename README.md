@@ -29,6 +29,9 @@ Leave `DATABASE_URL` empty locally: a SQLite file is created and migrated for yo
 3. Set `APP_PASSWORD`, `APP_SECRET` and `MCP_TOKEN` in the Production environment. Set `APP_URL` only for a custom domain.
 4. Push to `main`: Vercel builds, runs `pnpm db:migrate` against the database, and deploys.
 
+## Self-host with Docker
+`cp .env.example .env`, set `APP_PASSWORD`, `APP_SECRET`, `MCP_TOKEN` and `APP_URL`, then `docker compose up -d`. The SQLite file lives in the `data` volume; run one instance only. Back it up with `sqlite3 /data/english.db ".backup <file>"` inside the container.
+
 ## Connect an assistant
 Open **Profile → Connect an assistant** in the app. It has the steps for Claude (claude.ai and Claude Code), ChatGPT (custom MCP server, OAuth) and Codex, with copy buttons. Sign-in asks for `APP_PASSWORD` once.
 

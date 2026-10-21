@@ -7,6 +7,8 @@ const securityHeaders = [
 ] as const;
 
 const nextConfig: NextConfig = {
+  // The Docker image runs .next/standalone; Vercel and local builds keep the default output.
+  ...(process.env.BUILD_STANDALONE ? { output: "standalone" as const } : {}),
   // The libSQL driver ships a native module; Next must not bundle it.
   serverExternalPackages: ["@libsql/client", "libsql"],
   async headers() {

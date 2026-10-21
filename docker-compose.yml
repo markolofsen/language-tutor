@@ -1,0 +1,16 @@
+# Self-hosting: `cp .env.example .env`, fill APP_PASSWORD, APP_SECRET, MCP_TOKEN and APP_URL, then `docker compose up -d`.
+# One writer: never scale this service. The database file lives in the `data` volume.
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: file:/data/english.db
+    ports:
+      - "3000:3000"
+    volumes:
+      - data:/data
+
+volumes:
+  data:
