@@ -15,7 +15,7 @@ export function AttemptResult({ view, english }: Props) {
   const { attempt, errors } = view;
   const own = (
     <section className="flex flex-col gap-1">
-      <h2 className="text-sm font-medium text-base-content/70">Your answer</h2>
+      <h2 className="section-title">Your answer</h2>
       <p className="whitespace-pre-wrap text-base">{attempt.answerText}</p>
     </section>
   );
@@ -56,7 +56,7 @@ export function AttemptResult({ view, english }: Props) {
       </section>
       {own}
       <section className="flex flex-col gap-1">
-        <h2 className="flex items-center gap-1 text-sm font-medium text-base-content/70">
+        <h2 className="section-title flex items-center gap-1">
           More natural {listen}
         </h2>
         <p className="text-base">{attempt.betterVersion}</p>

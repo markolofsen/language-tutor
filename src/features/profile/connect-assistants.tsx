@@ -10,7 +10,7 @@ export function ConnectAssistants() {
   const info = connectInfo();
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="text-sm font-medium text-base-content/70">Connect an assistant</h2>
+      <h2 className="section-title">Connect an assistant</h2>
       <p className={hint}>
         Any of them signs in once with the password of this app (or just taps Allow while you are signed in here). Voice
         modes are worth trying with the same connector.

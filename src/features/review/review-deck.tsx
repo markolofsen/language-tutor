@@ -64,9 +64,12 @@ export function ReviewDeck({ cards }: { cards: DeckCard[] }) {
 
   return (
     <div className="flex flex-col gap-8">
-      <p className="text-sm text-base-content/70 tabular-nums">
-        {index + 1} / {cards.length}
-      </p>
+      <div className="flex items-center gap-3">
+        <progress className="progress progress-primary h-1.5 flex-1" value={index} max={cards.length} aria-label="Progress" />
+        <span className="text-sm text-base-content/70 tabular-nums">
+          {index + 1} / {cards.length}
+        </span>
+      </div>
       <p className="text-2xl leading-relaxed">
         {before}
         {blank}

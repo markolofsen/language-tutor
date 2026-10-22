@@ -209,7 +209,7 @@ export function Translator({ native, target, hasKey }: Props) {
   return (
     <div className="flex flex-col gap-5">
       <header className="flex items-center justify-between">
-        <h1 className="flex items-center gap-2 text-xl font-semibold">
+        <h1 className="flex items-center gap-2">
           <Languages className="size-5" aria-hidden /> Translate
         </h1>
         <span className="flex items-center gap-2 text-sm text-base-content/70">

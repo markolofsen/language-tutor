@@ -3,7 +3,7 @@
 import { Search, Trash2 } from "lucide-react";
 import { useMemo, useState, useTransition } from "react";
 
-import { Badge, Button, Input } from "@/ui";
+import { Button, Input } from "@/ui";
 
 import { deleteWordsAction } from "./actions";
 
@@ -16,6 +16,8 @@ export type WordItem = {
   seen: number;
   missed: number;
 };
+
+const STATUS_TONE = { new: "text-info", learning: "text-warning", known: "text-success" } as const;
 
 const FILTERS = [
   { key: "all", label: "All" },
@@ -60,7 +62,7 @@ export function WordList({ items }: { items: WordItem[] }) {
   };
 
   const rows = shown.map((word) => (
-    <li key={word.id} className="border-t border-base-300">
+    <li key={word.id} className="border-t border-base-300 first:border-t-0">
       <label className="flex cursor-pointer items-start gap-3 py-2">
         <input
           type="checkbox"
@@ -74,29 +76,31 @@ export function WordList({ items }: { items: WordItem[] }) {
           <span className="ml-2 text-base-content/70">{word.translation}</span>
           {word.association ? <span className="block text-sm">{word.association}</span> : null}
         </span>
-        <Badge variant={word.status === "known" ? "secondary" : "outline"}>
+        <span className={`text-xs font-semibold ${STATUS_TONE[word.status]}`}>
           {word.status}
           {word.seen > 0 ? ` ${word.seen - word.missed}/${word.seen}` : ""}
-        </Badge>
+        </span>
       </label>
     </li>
   ));
 
+  const count = (key: (typeof FILTERS)[number]["key"]) => (key === "all" ? items.length : items.filter((word) => word.status === key).length);
   const chips = FILTERS.map((item) => (
     <button
       key={item.key}
       type="button"
       onClick={() => setFilter(item.key)}
-      className={`btn btn-sm ${filter === item.key ? "btn-primary" : "btn-ghost"}`}
+      className={`btn btn-sm gap-1.5 ${filter === item.key ? "btn-primary" : "btn-ghost"}`}
     >
       {item.label}
+      <span className="text-xs opacity-60">{count(item.key)}</span>
     </button>
   ));
 
   return (
     <div className="flex flex-col gap-4">
       <div className="relative">
-        <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-base-content/50" aria-hidden />
+        <Search className="pointer-events-none absolute left-3 z-10 top-1/2 size-4 -translate-y-1/2 text-base-content/50" aria-hidden />
         <Input
           type="search"
           value={query}
@@ -107,7 +111,7 @@ export function WordList({ items }: { items: WordItem[] }) {
       </div>
       <div className="flex flex-wrap gap-1">{chips}</div>
       {error ? <p role="alert" className="text-sm text-error">{error}</p> : null}
-      <ul>{rows}</ul>
+      <ul className="panel py-1">{rows}</ul>
       {shown.length === 0 ? <p className="py-6 text-center text-sm text-base-content/70">No words match.</p> : null}
       {selected.size > 0 ? (
         <div className="sticky bottom-20 flex items-center justify-between gap-3 rounded-box border border-base-300 bg-base-100 p-3 shadow">

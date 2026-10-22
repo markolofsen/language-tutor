@@ -39,29 +39,29 @@ export default async function ProfilePage() {
     );
 
   return (
-    <div className="flex flex-col gap-8">
-      <header className="flex flex-col gap-1">
-        <h1 className="text-xl font-semibold">Profile</h1>
+    <div className="flex flex-col gap-4">
+      <header className="mb-2 flex flex-col gap-1">
+        <h1>Profile</h1>
         <p className="text-sm text-base-content/70">{accuracy}</p>
       </header>
-      <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-base-content/70">Where errors come from</h2>
+      <section className="panel flex flex-col gap-3">
+        <h2 className="section-title">Where errors come from</h2>
         {weights}
       </section>
-      <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-base-content/70">Habits</h2>
+      <section className="panel flex flex-col gap-3">
+        <h2 className="section-title">Habits</h2>
         <HabitList patterns={context.patterns} resolved={context.resolvedPatterns.length} />
       </section>
-      <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-base-content/70">Latest errors</h2>
-        <ul className="flex flex-col gap-3">{errors}</ul>
+      <section className="panel flex flex-col gap-3">
+        <h2 className="section-title">Latest errors</h2>
+        {errors.length > 0 ? <ul className="flex flex-col gap-3">{errors}</ul> : <p className="text-sm text-base-content/70">None yet.</p>}
       </section>
-      <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-base-content/70">Listening by accent</h2>
+      <section className="panel flex flex-col gap-3">
+        <h2 className="section-title">Listening by accent</h2>
         {listening}
       </section>
-      <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-base-content/70">Translator</h2>
+      <section className="panel flex flex-col gap-3">
+        <h2 className="section-title">Translator</h2>
         <TranslatorSettingsForm settings={translator} />
       </section>
       <ConnectAssistants />

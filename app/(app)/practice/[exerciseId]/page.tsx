@@ -40,7 +40,7 @@ export default async function ExercisePage({ params }: Props) {
     <div className="flex flex-col gap-6">
       <PracticeModes active="Paragraphs" />
       <header className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">{toEnglish ? "Russian → English" : "English → Russian"}</h1>
+        <h1>{toEnglish ? "Russian → English" : "English → Russian"}</h1>
         {listen}
       </header>
       <p className="whitespace-pre-wrap text-lg leading-relaxed">{exercise.sourceText}</p>
