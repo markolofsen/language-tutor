@@ -16,7 +16,7 @@ export const words = sqliteTable(
     translation: text("translation").notNull().default(""),
     association: text("association").notNull().default(""),
     example: text("example").notNull().default(""),
-    source: text("source", { enum: ["import", "manual", "story"] }).notNull().default("manual"),
+    source: text("source", { enum: ["import", "manual", "story", "translator"] }).notNull().default("manual"),
     status: text("status", { enum: ["new", "learning", "known"] }).notNull().default("new"),
     seen: integer("seen").notNull().default(0),
     missed: integer("missed").notNull().default(0),

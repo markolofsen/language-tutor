@@ -1,5 +1,7 @@
 import { accentLabel } from "@/domain/accents";
 import { ConnectAssistants } from "@/features/profile/connect-assistants";
+import { TranslatorSettingsForm } from "@/features/profile/translator-settings";
+import { getTranslatorSettings } from "@/translate/settings";
 import { HabitList } from "@/features/profile/habit-list";
 import { CategoryBars } from "@/features/profile/category-bars";
 import { ErrorItem } from "@/features/practice/error-item";
@@ -11,7 +13,7 @@ const ERROR_LIMIT = 10;
 
 export default async function ProfilePage() {
   const now = new Date();
-  const context = await learnerContext(now);
+  const [context, translator] = await Promise.all([learnerContext(now), getTranslatorSettings()]);
   const share = context.accuracyLast20;
   const accuracy = share === null ? "Not enough answers yet" : `${Math.round(share * 100)}% of the last answers scored 4 or 5`;
   const errors = (await recentErrors(now, ERROR_LIMIT)).map((e) => <ErrorItem key={e.id} error={e} />);
@@ -57,6 +59,10 @@ export default async function ProfilePage() {
       <section className="flex flex-col gap-3">
         <h2 className="text-sm font-medium text-base-content/60">Listening by accent</h2>
         {listening}
+      </section>
+      <section className="flex flex-col gap-3">
+        <h2 className="text-sm font-medium text-base-content/60">Translator</h2>
+        <TranslatorSettingsForm settings={translator} />
       </section>
       <ConnectAssistants />
     </div>

@@ -6,6 +6,7 @@ import { accentSummaries } from "@/listening/dictation";
 import { countPending, recentScores } from "@/practice/attempts";
 import { countUnanswered } from "@/practice/exercises";
 import { countDue } from "@/review/cards";
+import { getTranslatorSettings } from "@/translate/settings";
 import { justTaught, practiceWords, wordCounts } from "@/words/store";
 
 import { advisedSentences, accuracy } from "./load";
@@ -25,7 +26,7 @@ export async function recentErrors(now: Date, limit?: number) {
 
 /** Everything the tutor needs to pick the next move, in one read (the queries run side by side). */
 export async function learnerContext(now: Date) {
-  const [allErrors, scores, plan, patterns, words, taught, due, unanswered, pending, toPractise, accents] =
+  const [allErrors, scores, plan, patterns, words, taught, due, unanswered, pending, toPractise, accents, languages] =
     await Promise.all([
       recentErrors(now),
       recentScores(RECENT_ATTEMPTS),
@@ -38,11 +39,13 @@ export async function learnerContext(now: Date) {
       countPending(),
       practiceWords(8),
       accentSummaries(),
+      getTranslatorSettings(),
     ]);
   const dated: DatedError[] = allErrors.map((e) => ({ category: e.category, at: e.createdAt }));
   const weights = categoryWeights(dated, now);
   const share = accuracy(scores);
   return {
+    languages: { native: languages.native, target: languages.target },
     goal: plan.goal,
     method: plan.method,
     patterns: patterns

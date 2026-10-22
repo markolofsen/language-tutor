@@ -1,6 +1,7 @@
 /** Every internal destination is built here; nothing else writes a path. */
 export const routes = {
   today: "/",
+  translate: "/translate",
   practice: "/practice",
   exercise: (id: number) => `/practice/${id}`,
   review: "/review",
@@ -10,13 +11,13 @@ export const routes = {
   login: "/login",
 } as const;
 
-export type NavKey = "today" | "practice" | "review" | "listen" | "words" | "profile";
+export type NavKey = "today" | "translate" | "practice" | "review" | "listen" | "profile";
 
 export const NAV: readonly { key: NavKey; label: string; href: string }[] = [
   { key: "today", label: "Today", href: routes.today },
-  { key: "practice", label: "Translate", href: routes.practice },
+  { key: "translate", label: "Translate", href: routes.translate },
+  { key: "practice", label: "Practice", href: routes.practice },
   { key: "review", label: "Review", href: routes.review },
   { key: "listen", label: "Listen", href: routes.listen },
-  { key: "words", label: "Words", href: routes.words },
   { key: "profile", label: "Profile", href: routes.profile },
 ];

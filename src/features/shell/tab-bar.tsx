@@ -1,6 +1,6 @@
 "use client";
 
-import { BookText, ChartColumn, Headphones, House, Layers, PenLine, type LucideIcon } from "lucide-react";
+import { ChartColumn, Headphones, House, Languages, Layers, PenLine, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -8,10 +8,10 @@ import { NAV, type NavKey } from "@/routes";
 
 const ICONS: Record<NavKey, LucideIcon> = {
   today: House,
+  translate: Languages,
   practice: PenLine,
   review: Layers,
   listen: Headphones,
-  words: BookText,
   profile: ChartColumn,
 };
 

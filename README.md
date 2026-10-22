@@ -11,6 +11,7 @@ Today it teaches English to Russian speakers. Other languages are planned.
 - **The assistant writes a story** around your words. You translate it paragraph by paragraph, in both directions.
 - **Every mistake is named** by category and by the rule behind it. A mistake that repeats becomes a habit the tutor works on, until you get it right often enough to retire it.
 - **Reviews** use the FSRS scheduler ([ts-fsrs](https://github.com/open-spaced-repetition/ts-fsrs)): cards come back just before you would forget them.
+- **A translator** (the Translate tab) that works like Google Translate but with an LLM: type in either of your two languages and the translation appears as you type, with other phrasings, a note on a trap, and the words worth learning, each with a memory hook. One tap saves the words (and, for a short text, the whole phrase) into your dictionary; each word comes back as a review card built from the sentence it was found in.
 - **The phone app** (a PWA) does what a chat cannot: typed translation, review cards, dictation, voices, a read-only profile.
 - The tutoring method and its reasoning live in [`@docs/research`](@docs/research/methods.md); the assistant reads the agreed method from the server, so every assistant teaches the same way.
 
@@ -45,6 +46,9 @@ Open **Profile → Connect an assistant** in the app. It has the steps for Claud
 | `MCP_TOKEN` | the bearer token of `/mcp` |
 | `DATABASE_URL`, `DATABASE_AUTH_TOKEN` | libSQL database; empty means a local file |
 | `APP_URL` | public origin when it is not the Vercel production domain |
+| `OPENROUTER_API_KEY` | key for the translator ([OpenRouter](https://openrouter.ai) or any OpenAI-compatible endpoint); or paste it in Profile → Translator |
+| `TRANSLATE_MODEL` | default model, `openai/gpt-5-mini`; any OpenRouter model that supports structured outputs |
+| `OPENROUTER_BASE_URL` | another OpenAI-compatible base URL (default `https://openrouter.ai/api/v1`) |
 
 ## Development
 `pnpm check` runs lint, type-check and the tests (a local libSQL file, no server needed). `pnpm db:generate` after changing `src/db/schema.ts`. The code map and invariants are in [`CLAUDE.md`](CLAUDE.md). See [`CONTRIBUTING.md`](CONTRIBUTING.md).

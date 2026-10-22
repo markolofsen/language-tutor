@@ -9,6 +9,7 @@ proxy.ts    single-user cookie gate; login, /mcp, /oauth, /.well-known and stati
 src/
   domain/   zod contracts shared by MCP tools and screens (categories, evaluation, story, accents, words)
   db/       Drizzle schema + the one libSQL connection (a local file is migrated on first use; a remote one by `pnpm db:migrate`)
+  translate/ OpenRouter translator (translate.ts), saving to the dictionary (save.ts), languages and key settings (settings.ts); route /api/translate
   ui/       Button, Badge, Input, Textarea, Empty: thin daisyUI wrappers
   config.ts the environment: password, session key, MCP token, public origin (read when used)
   words/ stories/ practice/ review/ listening/ profile/   one job each, server-only logic
