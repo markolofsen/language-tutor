@@ -2,6 +2,8 @@ import { z } from "zod";
 
 import { LANGUAGES, type LanguageCode } from "@/domain/languages";
 
+import { proxyAwareFetch } from "./proxy-fetch";
+
 const MAX_TEXT = 2000;
 const TIMEOUT_MS = 25_000;
 
@@ -84,7 +86,7 @@ export async function translate(input: TranslateInput): Promise<TranslationResul
   };
   const timeout = AbortSignal.timeout(TIMEOUT_MS);
   const signal = input.signal ? AbortSignal.any([input.signal, timeout]) : timeout;
-  const call = input.fetcher ?? fetch;
+  const call = input.fetcher ?? proxyAwareFetch();
   let response: Response;
   try {
     response = await call(`${baseUrl()}/chat/completions`, {
