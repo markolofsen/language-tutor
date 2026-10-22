@@ -1,17 +1,92 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark;
+  themes: false;
+}
+
+/* One dark theme: deep ink surfaces, a violet accent, soft borders. */
+@plugin "daisyui/theme" {
+  name: "tutor";
+  default: true;
+  prefersdark: true;
+  color-scheme: dark;
+  --color-base-100: oklch(19% 0.025 268);
+  --color-base-200: oklch(22.5% 0.03 268);
+  --color-base-300: oklch(29% 0.035 268);
+  --color-base-content: oklch(94% 0.012 268);
+  --color-primary: oklch(70% 0.17 282);
+  --color-primary-content: oklch(16% 0.03 282);
+  --color-secondary: oklch(76% 0.11 195);
+  --color-secondary-content: oklch(18% 0.03 195);
+  --color-accent: oklch(82% 0.13 85);
+  --color-accent-content: oklch(20% 0.04 85);
+  --color-neutral: oklch(26% 0.03 268);
+  --color-neutral-content: oklch(92% 0.012 268);
+  --color-info: oklch(74% 0.12 235);
+  --color-info-content: oklch(18% 0.03 235);
+  --color-success: oklch(76% 0.15 160);
+  --color-success-content: oklch(18% 0.04 160);
+  --color-warning: oklch(82% 0.14 80);
+  --color-warning-content: oklch(20% 0.04 80);
+  --color-error: oklch(70% 0.19 22);
+  --color-error-content: oklch(17% 0.04 22);
+  --radius-selector: 1rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@theme {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 @source "../src";
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* rem scales every size in the app: 17px reads better on a phone than 16px */
+  font-size: 17px;
 }
 
 body {
   min-height: 100dvh;
   overscroll-behavior-y: none;
+  line-height: 1.55;
+  font-feature-settings: "cv11", "ss01";
+  text-rendering: optimizeLegibility;
+  background-image: radial-gradient(60rem 30rem at 50% -10rem, oklch(30% 0.09 282 / 0.35), transparent 70%);
+  background-repeat: no-repeat;
+}
+
+h1 {
+  font-size: 1.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.2rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.btn {
+  font-weight: 600;
+}
+
+/* Fields sit on a raised surface and focus in the accent colour, not white. */
+.input,
+.textarea {
+  background-color: var(--color-base-200);
+  --input-color: var(--color-primary);
+}
+
+::selection {
+  background: oklch(70% 0.17 282 / 0.35);
 }
 
 /* Shown only when an answer is slow: a cached or fast one never flashes a loader. */

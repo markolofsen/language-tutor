@@ -39,7 +39,7 @@ export function TranslatorSettingsForm({ settings }: { settings: TranslatorSetti
       <label className="flex flex-col gap-1 text-sm">
         OpenRouter key
         <Input name="apiKey" type="password" autoComplete="off" placeholder="sk-or-…" />
-        <span className="text-base-content/60">{KEY_STATUS[settings.keySource](settings.keyTail)}</span>
+        <span className="text-base-content/70">{KEY_STATUS[settings.keySource](settings.keyTail)}</span>
       </label>
       {settings.keySource === "app" ? (
         <label className="flex items-center gap-2 text-sm">

@@ -11,7 +11,7 @@ export function DiffView({ diff, accent }: { diff: WordDiff; accent: string }) {
   ));
   return (
     <section className="flex flex-col gap-2" aria-live="polite">
-      <p className="text-sm text-base-content/60">
+      <p className="text-sm text-base-content/70">
         {accent} accent · heard {diff.ok} of {diff.tokens.length}
       </p>
       <p className="text-lg leading-relaxed">{words}</p>

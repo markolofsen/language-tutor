@@ -25,7 +25,7 @@ export default async function WordsPage() {
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-xl font-semibold">Words</h1>
-      <p className="flex gap-4 text-sm text-base-content/60">{summary}</p>
+      <p className="flex gap-4 text-sm text-base-content/70">{summary}</p>
       <WordList items={items} />
     </div>
   );

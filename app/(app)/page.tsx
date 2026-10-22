@@ -24,7 +24,7 @@ export default async function TodayPage() {
   const focusBlock =
     focus.length > 0 ? (
       <section className="flex flex-col gap-2">
-        <h2 className="text-sm font-medium text-base-content/60">Working on</h2>
+        <h2 className="text-sm font-medium text-base-content/70">Working on</h2>
         <div className="flex flex-wrap gap-2">{focus}</div>
       </section>
     ) : null;
@@ -33,11 +33,11 @@ export default async function TodayPage() {
     <div className="flex flex-col gap-8">
       <header className="flex flex-col gap-1">
         <h1 className="text-3xl font-semibold">{action.title}</h1>
-        <p className="text-base-content/60">{action.detail}</p>
+        <p className="text-base-content/70">{action.detail}</p>
       </header>
       {cta}
       {focusBlock}
-      <p className="text-sm text-base-content/60">
+      <p className="text-sm text-base-content/70">
         <Link href={routes.words} className="underline-offset-4 hover:underline">
           {context.words.known} known · {context.words.learning} learning · {context.words.new} new
         </Link>

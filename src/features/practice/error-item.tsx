@@ -10,12 +10,12 @@ export function ErrorItem({ error }: { error: ErrorRow }) {
         {CATEGORY_LABELS[error.category]}
       </Badge>
       <p className="text-base">
-        <span className="text-base-content/60 line-through">{error.span}</span>
+        <span className="text-base-content/70 line-through">{error.span}</span>
         <span aria-hidden> → </span>
         <span className="sr-only"> corrected to </span>
         <span className="font-medium">{error.fix}</span>
       </p>
-      <p className="text-sm text-base-content/60">{error.note}</p>
+      <p className="text-sm text-base-content/70">{error.note}</p>
     </li>
   );
 }

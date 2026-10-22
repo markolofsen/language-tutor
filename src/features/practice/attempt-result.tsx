@@ -15,7 +15,7 @@ export function AttemptResult({ view, english }: Props) {
   const { attempt, errors } = view;
   const own = (
     <section className="flex flex-col gap-1">
-      <h2 className="text-sm font-medium text-base-content/60">Your answer</h2>
+      <h2 className="text-sm font-medium text-base-content/70">Your answer</h2>
       <p className="whitespace-pre-wrap text-base">{attempt.answerText}</p>
     </section>
   );
@@ -39,7 +39,7 @@ export function AttemptResult({ view, english }: Props) {
   const more =
     rest.length > 0 ? (
       <details className="text-sm">
-        <summary className="cursor-pointer text-base-content/60">{rest.length} more</summary>
+        <summary className="cursor-pointer text-base-content/70">{rest.length} more</summary>
         <ul className="mt-3 flex flex-col gap-3">{rest}</ul>
       </details>
     ) : null;
@@ -50,13 +50,13 @@ export function AttemptResult({ view, english }: Props) {
       <section className="flex items-baseline gap-3">
         <span className="flex shrink-0 items-baseline gap-1 whitespace-nowrap">
           <span className="text-4xl font-semibold tabular-nums">{attempt.score}</span>
-          <span className="text-base-content/60">/ 5</span>
+          <span className="text-base-content/70">/ 5</span>
         </span>
         <p className="text-sm">{attempt.summary}</p>
       </section>
       {own}
       <section className="flex flex-col gap-1">
-        <h2 className="flex items-center gap-1 text-sm font-medium text-base-content/60">
+        <h2 className="flex items-center gap-1 text-sm font-medium text-base-content/70">
           More natural {listen}
         </h2>
         <p className="text-base">{attempt.betterVersion}</p>

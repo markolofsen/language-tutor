@@ -20,7 +20,7 @@ export default async function ProfilePage() {
   const accents = context.listeningByAccent.map((a) => (
     <li key={a.accent} className="flex justify-between text-sm">
       <span>{accentLabel(a.accent)}</span>
-      <span className="text-base-content/60 tabular-nums">
+      <span className="text-base-content/70 tabular-nums">
         {Math.round(a.heardShare * 100)}% of words · {a.clips} clips
       </span>
     </li>
@@ -29,39 +29,39 @@ export default async function ProfilePage() {
     accents.length > 0 ? (
       <ul className="flex flex-col gap-2">{accents}</ul>
     ) : (
-      <p className="text-sm text-base-content/60">No dictations yet.</p>
+      <p className="text-sm text-base-content/70">No dictations yet.</p>
     );
   const weights =
     context.categoryWeights.length > 0 ? (
       <CategoryBars weights={context.categoryWeights} />
     ) : (
-      <p className="text-sm text-base-content/60">No errors recorded in the last four weeks.</p>
+      <p className="text-sm text-base-content/70">No errors recorded in the last four weeks.</p>
     );
 
   return (
     <div className="flex flex-col gap-8">
       <header className="flex flex-col gap-1">
         <h1 className="text-xl font-semibold">Profile</h1>
-        <p className="text-sm text-base-content/60">{accuracy}</p>
+        <p className="text-sm text-base-content/70">{accuracy}</p>
       </header>
       <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-base-content/60">Where errors come from</h2>
+        <h2 className="text-sm font-medium text-base-content/70">Where errors come from</h2>
         {weights}
       </section>
       <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-base-content/60">Habits</h2>
+        <h2 className="text-sm font-medium text-base-content/70">Habits</h2>
         <HabitList patterns={context.patterns} resolved={context.resolvedPatterns.length} />
       </section>
       <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-base-content/60">Latest errors</h2>
+        <h2 className="text-sm font-medium text-base-content/70">Latest errors</h2>
         <ul className="flex flex-col gap-3">{errors}</ul>
       </section>
       <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-base-content/60">Listening by accent</h2>
+        <h2 className="text-sm font-medium text-base-content/70">Listening by accent</h2>
         {listening}
       </section>
       <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-base-content/60">Translator</h2>
+        <h2 className="text-sm font-medium text-base-content/70">Translator</h2>
         <TranslatorSettingsForm settings={translator} />
       </section>
       <ConnectAssistants />

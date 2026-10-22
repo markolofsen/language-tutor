@@ -31,7 +31,7 @@ export function Dictation({ text, summaries }: Props) {
 
   if (!accent) {
     return (
-      <p className="text-sm text-base-content/60">
+      <p className="text-sm text-base-content/70">
         No English voice found. On iPhone add one in Settings → Accessibility → Spoken Content → Voices.
       </p>
     );

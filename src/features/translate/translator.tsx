@@ -140,7 +140,7 @@ export function Translator({ native, target, hasKey }: Props) {
 
   const noKey =
     !hasKey || problem?.code === "no_key" ? (
-      <p className="text-sm text-base-content/60">
+      <p className="text-sm text-base-content/70">
         Add an OpenRouter key in <Link href={routes.profile} className="underline">Profile</Link> to translate.
       </p>
     ) : null;
@@ -157,7 +157,7 @@ export function Translator({ native, target, hasKey }: Props) {
       />
       <span className="flex-1">
         <span className="font-medium">{w.word}</span>
-        <span className="ml-2 text-sm text-base-content/60">{w.translation}</span>
+        <span className="ml-2 text-base-content/70">{w.translation}</span>
         {w.association ? <span className="block text-sm">{w.association}</span> : null}
       </span>
       {w.saved ? <Badge variant="outline">saved</Badge> : null}
@@ -170,13 +170,13 @@ export function Translator({ native, target, hasKey }: Props) {
         <p className="whitespace-pre-wrap text-2xl leading-relaxed">{result.translation}</p>
         {english ? <SpeakButton text={english} /> : null}
       </div>
-      {result.note ? <p className="text-sm text-base-content/60">{result.note}</p> : null}
+      {result.note ? <p className="text-sm text-base-content/70">{result.note}</p> : null}
       {result.alternatives.length > 0 ? (
         <ul className="flex flex-col gap-1 text-sm">
           {result.alternatives.map((a) => (
             <li key={a.text}>
               {a.text}
-              {a.note ? <span className="ml-2 text-base-content/60">{a.note}</span> : null}
+              {a.note ? <span className="ml-2 text-base-content/70">{a.note}</span> : null}
             </li>
           ))}
         </ul>
@@ -192,7 +192,7 @@ export function Translator({ native, target, hasKey }: Props) {
         <Button size="lg" disabled={!canSave} loading={saving} onClick={save}>
           {chosen.length + (phrase ? 1 : 0) > 0 ? `Save ${chosen.length + (phrase ? 1 : 0)}` : "Save"}
         </Button>
-        {summary ? <span className="text-sm text-base-content/60">{summary}</span> : null}
+        {summary ? <span className="text-sm text-base-content/70">{summary}</span> : null}
       </div>
     </section>
   ) : null;
@@ -212,7 +212,7 @@ export function Translator({ native, target, hasKey }: Props) {
         <h1 className="flex items-center gap-2 text-xl font-semibold">
           <Languages className="size-5" aria-hidden /> Translate
         </h1>
-        <span className="flex items-center gap-2 text-sm text-base-content/60">
+        <span className="flex items-center gap-2 text-sm text-base-content/70">
           {direction ?? `${LANGUAGES[native]} · ${LANGUAGES[target]}`}
         </span>
       </header>
@@ -222,7 +222,7 @@ export function Translator({ native, target, hasKey }: Props) {
           onChange={(event) => onChange(event.target.value)}
           rows={4}
           maxLength={2000}
-          className="pr-10"
+          className="min-h-32 pr-10 text-lg leading-relaxed"
           autoFocus
           placeholder={`Type in ${LANGUAGES[native]} or ${LANGUAGES[target]}`}
           aria-label="Text to translate"

@@ -64,7 +64,7 @@ export function ReviewDeck({ cards }: { cards: DeckCard[] }) {
 
   return (
     <div className="flex flex-col gap-8">
-      <p className="text-sm text-base-content/60 tabular-nums">
+      <p className="text-sm text-base-content/70 tabular-nums">
         {index + 1} / {cards.length}
       </p>
       <p className="text-2xl leading-relaxed">
@@ -72,13 +72,13 @@ export function ReviewDeck({ cards }: { cards: DeckCard[] }) {
         {blank}
         {after}
       </p>
-      <p className="flex items-center gap-1 text-sm text-base-content/60">
+      <p className="flex items-center gap-1 text-sm text-base-content/70">
         {card.hint}
         {listen}
       </p>
       {phase === "revealed" && card.association ? (
         <p className="text-sm">
-          <span className="text-base-content/60">Hook: </span>
+          <span className="text-base-content/70">Hook: </span>
           {card.association}
         </p>
       ) : null}

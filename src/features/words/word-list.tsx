@@ -71,7 +71,7 @@ export function WordList({ items }: { items: WordItem[] }) {
         />
         <span className="min-w-0 flex-1">
           <span className="font-medium">{word.english}</span>
-          <span className="ml-2 text-sm text-base-content/60">{word.translation}</span>
+          <span className="ml-2 text-base-content/70">{word.translation}</span>
           {word.association ? <span className="block text-sm">{word.association}</span> : null}
         </span>
         <Badge variant={word.status === "known" ? "secondary" : "outline"}>
@@ -108,7 +108,7 @@ export function WordList({ items }: { items: WordItem[] }) {
       <div className="flex flex-wrap gap-1">{chips}</div>
       {error ? <p role="alert" className="text-sm text-error">{error}</p> : null}
       <ul>{rows}</ul>
-      {shown.length === 0 ? <p className="py-6 text-center text-sm text-base-content/60">No words match.</p> : null}
+      {shown.length === 0 ? <p className="py-6 text-center text-sm text-base-content/70">No words match.</p> : null}
       {selected.size > 0 ? (
         <div className="sticky bottom-20 flex items-center justify-between gap-3 rounded-box border border-base-300 bg-base-100 p-3 shadow">
           <span className="text-sm">{selected.size} selected</span>

@@ -13,5 +13,5 @@ export function EmptyTitle(props: HTMLAttributes<HTMLHeadingElement>) {
 }
 
 export function EmptyDescription(props: HTMLAttributes<HTMLParagraphElement>) {
-  return <p className="text-sm text-base-content/60" {...props} />;
+  return <p className="text-sm text-base-content/70" {...props} />;
 }
