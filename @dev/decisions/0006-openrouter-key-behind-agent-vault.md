@@ -13,4 +13,4 @@ On the production host (lang.reforms.ai) the container never holds the real Open
 
 ## Cost
 - Every translation depends on the vault host being reachable. A 407 means a bad agent token, a 403 no rule for the host, a 401 an empty key (`make check P=language` tells which).
-- A key pasted in Profile → Translator is sent as is and wins over the vault only if the vault is not in use; leave Profile empty on this host.
+- The environment key wins over one saved in Profile (`resolveApiKey`), so on this host Profile → Translator stays empty; the vault supplies the key.
