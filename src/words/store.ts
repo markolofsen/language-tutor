@@ -242,6 +242,14 @@ export async function removeWords(list: string[]): Promise<RemoveResult> {
   });
 }
 
+/** Deletes chosen words for good, with their cards, review history and story links (they cascade). For the learner's own cleanup in the app; the MCP `remove_words` keeps words that have history. */
+export async function deleteWordsById(ids: number[]): Promise<number> {
+  if (ids.length === 0) return 0;
+  const db = await getDb();
+  const removed = await db.delete(words).where(inArray(words.id, ids)).returning({ id: words.id }).all();
+  return removed.length;
+}
+
 /** Words saved in the last hours: the learner has just met them, so they are not tested yet. */
 export async function justTaught(now: Date, hours = 12): Promise<string[]> {
   const since = new Date(now.getTime() - hours * 3_600_000);

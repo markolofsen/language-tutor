@@ -10,7 +10,7 @@ import { DEFAULT_METHOD } from "@/domain/method";
 
 import { recordChatSentence } from "@/practice/record-chat";
 
-import { addWords, justTaught, listWords, updateWords } from "./store";
+import { addWords, deleteWordsById, justTaught, listWords, updateWords } from "./store";
 
 beforeAll(() => {
   process.env.DATABASE_URL = `file:${join(mkdtempSync(join(tmpdir(), "lang-")), "test.db")}`;
@@ -67,5 +67,15 @@ describe("a sentence judged in conversation", () => {
     );
     expect(recorded).toMatchObject({ errorsRecorded: 1, cardsCreated: 1 });
     expect(await justTaught(new Date())).toContain("plausible");
+  });
+});
+
+describe("deleting words from the app", () => {
+  it("removes a word together with its card", async () => {
+    await addWords([{ english: "doomed", translation: "обречённый", example: "A doomed plan." }], "manual");
+    const [word] = (await listWords({ limit: 500 })).filter((row) => row.english === "doomed");
+    expect(await deleteWordsById([word!.id])).toBe(1);
+    expect((await listWords({ limit: 500 })).some((row) => row.english === "doomed")).toBe(false);
+    expect(await deleteWordsById([])).toBe(0);
   });
 });

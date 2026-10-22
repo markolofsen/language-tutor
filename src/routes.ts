@@ -11,13 +11,14 @@ export const routes = {
   login: "/login",
 } as const;
 
-export type NavKey = "today" | "translate" | "practice" | "review" | "listen" | "profile";
+export type NavKey = "today" | "translate" | "practice" | "review" | "words" | "listen" | "profile";
 
 export const NAV: readonly { key: NavKey; label: string; href: string }[] = [
   { key: "today", label: "Today", href: routes.today },
   { key: "translate", label: "Translate", href: routes.translate },
   { key: "practice", label: "Practice", href: routes.practice },
   { key: "review", label: "Review", href: routes.review },
+  { key: "words", label: "Words", href: routes.words },
   { key: "listen", label: "Listen", href: routes.listen },
   { key: "profile", label: "Profile", href: routes.profile },
 ];

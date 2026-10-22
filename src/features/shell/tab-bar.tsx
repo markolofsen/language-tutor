@@ -1,6 +1,6 @@
 "use client";
 
-import { ChartColumn, Headphones, House, Languages, Layers, PenLine, type LucideIcon } from "lucide-react";
+import { ChartColumn, Headphones, BookText, House, Languages, Layers, PenLine, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -11,6 +11,7 @@ const ICONS: Record<NavKey, LucideIcon> = {
   translate: Languages,
   practice: PenLine,
   review: Layers,
+  words: BookText,
   listen: Headphones,
   profile: ChartColumn,
 };
@@ -28,7 +29,7 @@ export function TabBar() {
         key={item.key}
         href={item.href}
         aria-current={active ? "page" : undefined}
-        className={`flex min-h-14 flex-1 flex-col items-center justify-center gap-0.5 text-[11px] font-medium ${tone}`}
+        className={`flex min-h-14 flex-1 flex-col items-center justify-center gap-0.5 text-[10px] font-medium ${tone}`}
       >
         <Icon className="size-5" aria-hidden />
         {item.label}
