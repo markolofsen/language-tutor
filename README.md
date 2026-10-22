@@ -49,6 +49,7 @@ Open **Profile → Connect an assistant** in the app. It has the steps for Claud
 | `OPENROUTER_API_KEY` | key for the translator ([OpenRouter](https://openrouter.ai) or any OpenAI-compatible endpoint); or paste it in Profile → Translator |
 | `TRANSLATE_MODEL` | default model, `openai/gpt-5-mini`; any OpenRouter model that supports structured outputs |
 | `OPENROUTER_BASE_URL` | another OpenAI-compatible base URL (default `https://openrouter.ai/api/v1`) |
+| `HTTPS_PROXY`, `NODE_EXTRA_CA_CERTS` | optional: send translator calls through a credential-injecting proxy such as Agent Vault, so the container holds no real key ([0006](@dev/decisions/0006-openrouter-key-behind-agent-vault.md)) |
 
 ## Development
 `pnpm check` runs lint, type-check and the tests (a local libSQL file, no server needed). `pnpm db:generate` after changing `src/db/schema.ts`. The code map and invariants are in [`CLAUDE.md`](CLAUDE.md). See [`CONTRIBUTING.md`](CONTRIBUTING.md).
