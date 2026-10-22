@@ -31,5 +31,5 @@ All have 0–4 stars and a handful of commits. None records errors by category, 
 Instant in-app feedback on a translation is gone: the phone shows "waiting for Claude" until a Claude session evaluates it. If that hurts, add an optional route that evaluates through OpenRouter with the same contract; it is parked in `planned/`.
 
 ## Amended 2026-10-20
-- The app is thinner than first drawn: vocabulary and data are managed through MCP in a Claude chat (`add_words`, `update_words`, `remove_words`); the phone app keeps only the interactive parts and a read-only Words list.
+- The app is thinner than first drawn: vocabulary and data are managed through MCP in a Claude chat (`add_words`, `update_words`, `remove_words`); the phone app keeps only the interactive parts and a Words list (read-only at first; since 2026-10-23 the learner can search and delete there).
 - The rules for a clean dictionary are served by the MCP server itself (`src/mcp/word-rules.ts`), so any Claude client saves words the same way.

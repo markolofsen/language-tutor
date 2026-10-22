@@ -1,6 +1,6 @@
 "use client";
 
-import { ChartColumn, Headphones, BookText, House, Languages, Layers, PenLine, type LucideIcon } from "lucide-react";
+import { BookText, ChartColumn, House, Languages, PenLine, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -10,26 +10,25 @@ const ICONS: Record<NavKey, LucideIcon> = {
   today: House,
   translate: Languages,
   practice: PenLine,
-  review: Layers,
   words: BookText,
-  listen: Headphones,
   profile: ChartColumn,
 };
 
-const isActive = (pathname: string, href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+const isActive = (pathname: string, paths: readonly string[]) =>
+  paths.some((path) => (path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(`${path}/`)));
 
 export function TabBar() {
   const pathname = usePathname();
   const tabs = NAV.map((item) => {
     const Icon = ICONS[item.key];
-    const active = isActive(pathname, item.href);
+    const active = isActive(pathname, [item.href, ...item.also]);
     const tone = active ? "text-primary" : "text-base-content/60";
     return (
       <Link
         key={item.key}
         href={item.href}
         aria-current={active ? "page" : undefined}
-        className={`flex min-h-14 flex-1 flex-col items-center justify-center gap-0.5 text-[10px] font-medium ${tone}`}
+        className={`flex min-h-14 flex-1 flex-col items-center justify-center gap-0.5 text-[11px] font-medium ${tone}`}
       >
         <Icon className="size-5" aria-hidden />
         {item.label}

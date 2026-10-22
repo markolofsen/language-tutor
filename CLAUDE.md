@@ -1,6 +1,6 @@
 # `language-tutor` — the app
 
-A personal language tutor (English first): libSQL storage, a phone practice UI, and an MCP server that lets Claude be the tutor. Vocabulary and data are managed through MCP in a Claude chat; the app only does what a chat cannot (typed paragraph translation, review cards, dictation, voices, a read-only profile). Board and decisions: [`@dev/`](@dev/README.md). Learner and research: [`@docs/`](@docs/decisions.md). Rules: [`../../@rules/`](../../@rules/CLAUDE.md) (read `general/` before changing code).
+A personal language tutor (English first): libSQL storage, a phone practice UI, and an MCP server that lets Claude be the tutor. Vocabulary and data are managed through MCP in a Claude chat; the app only does what a chat cannot (typed paragraph translation, review cards, dictation, voices, a profile, and a Words list the learner can search and clean up). Five tabs in `src/routes.ts`: Today (review starts here), Translate, Practice (Paragraphs and Dictation modes), Words, Profile. Board and decisions: [`@dev/`](@dev/README.md). Learner and research: [`@docs/`](@docs/decisions.md). Rules: [`../../@rules/`](../../@rules/CLAUDE.md) (read `general/` before changing code).
 
 ## Map
 ```

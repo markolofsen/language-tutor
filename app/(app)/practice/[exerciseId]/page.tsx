@@ -1,6 +1,7 @@
 import { Badge } from "@/ui";
 import { notFound } from "next/navigation";
 
+import { PracticeModes } from "@/features/practice/modes";
 import { AnswerForm } from "@/features/practice/answer-form";
 import { AttemptResult } from "@/features/practice/attempt-result";
 import { SpeakButton } from "@/features/voice/speak-button";
@@ -37,6 +38,7 @@ export default async function ExercisePage({ params }: Props) {
 
   return (
     <div className="flex flex-col gap-6">
+      <PracticeModes active="Paragraphs" />
       <header className="flex items-center justify-between">
         <h1 className="text-xl font-semibold">{toEnglish ? "Russian → English" : "English → Russian"}</h1>
         {listen}
