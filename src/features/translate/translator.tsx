@@ -32,6 +32,7 @@ export function Translator({ native, target, hasKey }: Props) {
   const [result, setResult] = useState<Result | null>(null);
   const [problem, setProblem] = useState<Problem | null>(null);
   const [busy, setBusy] = useState(false);
+  const [waiting, setWaiting] = useState(false);
   const [picked, setPicked] = useState<Set<string>>(new Set());
   const [phrase, setPhrase] = useState(false);
   const [summary, setSummary] = useState<string | null>(null);
@@ -43,6 +44,7 @@ export function Translator({ native, target, hasKey }: Props) {
     controller.current?.abort();
     const abort = new AbortController();
     controller.current = abort;
+    setWaiting(false);
     setBusy(true);
     setProblem(null);
     try {
@@ -79,8 +81,10 @@ export function Translator({ native, target, hasKey }: Props) {
       setResult(null);
       setProblem(null);
       setBusy(false);
+      setWaiting(false);
       return;
     }
+    setWaiting(true);
     timer.current = setTimeout(() => void run(value.trim()), DEBOUNCE_MS);
   };
 
@@ -94,8 +98,10 @@ export function Translator({ native, target, hasKey }: Props) {
       return next;
     });
 
+  // From the first keystroke until the answer for the current text arrives: the old answer is stale.
+  const pending = waiting || busy;
   const chosen = result?.words.filter((w) => picked.has(w.word)) ?? [];
-  const canSave = result !== null && (chosen.length > 0 || phrase);
+  const canSave = result !== null && !pending && (chosen.length > 0 || phrase);
   const short = source.split(/\s+/).filter(Boolean).length <= PHRASE_MAX_WORDS;
 
   const save = () => {
@@ -159,7 +165,7 @@ export function Translator({ native, target, hasKey }: Props) {
   ));
 
   const output = result ? (
-    <section className="flex flex-col gap-4" aria-live="polite">
+    <section className={`flex flex-col gap-4 transition-opacity duration-200 ${busy ? "opacity-40" : ""}`} aria-live="polite" aria-busy={pending}>
       <div className="flex items-start justify-between gap-2">
         <p className="whitespace-pre-wrap text-2xl leading-relaxed">{result.translation}</p>
         {english ? <SpeakButton text={english} /> : null}
@@ -191,6 +197,15 @@ export function Translator({ native, target, hasKey }: Props) {
     </section>
   ) : null;
 
+  const skeleton =
+    pending && !problem ? (
+      <div className="pending-in flex flex-col gap-3" aria-hidden>
+        <div className="skeleton h-7 w-4/5" />
+        <div className="skeleton h-7 w-3/5" />
+        <div className="skeleton h-4 w-2/5" />
+      </div>
+    ) : null;
+
   return (
     <div className="flex flex-col gap-5">
       <header className="flex items-center justify-between">
@@ -198,7 +213,6 @@ export function Translator({ native, target, hasKey }: Props) {
           <Languages className="size-5" aria-hidden /> Translate
         </h1>
         <span className="flex items-center gap-2 text-sm text-base-content/60">
-          {busy ? <span className="loading loading-dots loading-sm" aria-label="Translating" /> : null}
           {direction ?? `${LANGUAGES[native]} · ${LANGUAGES[target]}`}
         </span>
       </header>
@@ -219,13 +233,21 @@ export function Translator({ native, target, hasKey }: Props) {
           </Button>
         ) : null}
       </div>
+      <div className="h-1">
+        {pending ? <progress className="progress progress-primary pending-in h-1 w-full" aria-label="Translating" /> : null}
+      </div>
       {noKey}
       {problem && problem.code !== "no_key" ? (
-        <p role="alert" className="text-sm text-error">
+        <p role="alert" className="flex items-center gap-3 text-sm text-error">
           {problem.message}
+          {problem.code !== "empty" && !pending ? (
+            <Button type="button" variant="outline" size="sm" onClick={() => void run(text.trim())}>
+              Try again
+            </Button>
+          ) : null}
         </p>
       ) : null}
-      {output}
+      {output ?? skeleton}
     </div>
   );
 }

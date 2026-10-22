@@ -13,3 +13,12 @@ body {
   min-height: 100dvh;
   overscroll-behavior-y: none;
 }
+
+/* Shown only when an answer is slow: a cached or fast one never flashes a loader. */
+@keyframes pending-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.pending-in {
+  animation: pending-in 0.2s ease-out 0.3s both;
+}
