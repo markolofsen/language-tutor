@@ -75,7 +75,7 @@ export function ReviewDeck({ cards }: { cards: DeckCard[] }) {
         {blank}
         {after}
       </p>
-      <p className="flex items-center gap-1 text-sm text-base-content/70">
+      <p className="flex items-center gap-1 text-lg text-base-content/70">
         {card.hint}
         {listen}
       </p>
